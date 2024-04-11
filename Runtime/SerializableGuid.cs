@@ -14,14 +14,18 @@ public struct SerializableGuid : ISerializationCallbackReceiver {
  
     public SerializableGuid(Guid guid) {
         this.guid = guid;
-        serializedGuid = null;
+        serializedGuid = guid.ToString();
     }
  
     public override bool Equals(object obj) {
         return obj is SerializableGuid guid &&
                 this.guid.Equals(guid.guid);
     }
- 
+
+    public static SerializableGuid NewGuid()
+    {
+        return System.Guid.NewGuid();
+    }
     public override int GetHashCode() {
         return -1324198676 + guid.GetHashCode();
     }
